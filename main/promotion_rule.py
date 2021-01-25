@@ -16,3 +16,24 @@ class PromotionRule(object):
 
         self.products.append(product)
         return True
+
+
+    def applicable(self, product=None, quantity=0, total_price=0):
+
+        if self.promotion_type == 'on_item_price':
+            result = []
+            for item in self.products:
+                if item.product_code == product.product_code:
+                    result.append(product)
+            return result and quantity >= self.min_quantity
+        elif self.promotion_type == 'on_total_price':
+            return total_price >= self.min_price
+
+    def valid(self):
+        if self.error():
+            return False
+        else:
+            return True
+
+    def error(self):
+        pass
