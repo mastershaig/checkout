@@ -36,4 +36,15 @@ class PromotionRule(object):
             return True
 
     def error(self):
-        pass
+        errors = []
+        if self.promotion_type == 'on_item_price':
+            if not self.products:
+                errors.append("products is required")
+            if not self.min_quantity:
+                errors.append("min_quantity is required")
+        elif self.promotion_type == 'on_total_price':
+            if not self.min_price:
+                errors.append("min_price is required")
+
+        self.error_messages = errors
+        return errors
