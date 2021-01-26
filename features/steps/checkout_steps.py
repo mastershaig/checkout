@@ -8,7 +8,7 @@ def step_impl(context):
     context.basket = [context.product_1, context.product_2, context.product_3]
 
 
-@when('spending over £60 and buy 2 or more Curry')
+@when('spending over £30 and buy 2 or more pizzas')
 def step_impl(context):
     context.promotion_rules = [context.promotion_rule_1, context.promotion_rule_2]
 
@@ -18,9 +18,7 @@ def step_impl(context, price):
     co = Checkout(context.promotion_rules)
     for val in context.basket:
         co.scan(val)
-
-    cal = co.total()
-    assert cal == float(price)
+    assert co.total() == float(price)
 
 
 @when('not apply any promotions')
@@ -28,32 +26,27 @@ def step_impl(context):
     context.promotion_rules = []
 
 
-@given('product code: 001, 003, 001')
+@given('product code: 002, 001, 002')
 def step_impl(context):
-    context.basket = [context.product_1, context.product_3, context.product_1]
+    context.basket = [context.product_2, context.product_1, context.product_2]
 
 
-@given('product code: 001, 002, 001, 003')
+@given('product code: 002, 001, 002, 003')
 def step_impl(context):
-    context.basket = [context.product_1, context.product_2, context.product_1, context.product_3]
+    context.basket = [context.product_2, context.product_1, context.product_2, context.product_3]
 
 
-@given('product code: 001, 001')
+@given('product code: 002, 003')
 def step_impl(context):
-    context.basket = [context.product_1, context.product_1]
+    context.basket = [context.product_2, context.product_3]
 
 
-@given('product code: 001, 003')
+@given('product code: 002, 003, 003, 003')
 def step_impl(context):
-    context.basket = [context.product_1, context.product_3]
+    context.basket = [context.product_2, context.product_3, context.product_3, context.product_3]
 
 
-@given('product code: 001, 003, 003, 003')
-def step_impl(context):
-    context.basket = [context.product_1, context.product_3, context.product_3, context.product_3]
-
-
-@when('spending over £60 and buy 3 or more T-Shirt')
+@when('spending over £30 and buy 3 or more T-Shirt')
 def step_impl(context):
     promotion_rule = PromotionRule(promotion_name="promotion T-Shirt x3", promotion_type="on_item_price",
                                    promotion_price=15, min_quantity=3)
