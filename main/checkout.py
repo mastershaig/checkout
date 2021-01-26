@@ -32,7 +32,7 @@ class Checkout(object):
             applying promotion code
             :return: int
         """
-        return functools.reduce(lambda sum, cal: sum + cal.price, self.co_products)
+        return functools.reduce(lambda sum, cal: sum + float(cal.price), self.co_products, 0)
 
     def total(self):
         """
@@ -50,7 +50,7 @@ class Checkout(object):
         for rule in promo_rules_for_item:
             for product in self.co_products:
                 co_qty = len(list(filter(lambda p: p.product_code == product.product_code, self.co_products)))
-                if rule.applicable(product=product, quantity=co_qty):
+                if not rule.applicable(product=product, quantity=co_qty):
                     continue
                 # set promotion price for the product if rule can apply on this product
                 product.price = rule.promotion_price
