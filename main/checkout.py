@@ -40,7 +40,7 @@ class Checkout(object):
             :return: int
         """
         if not self.promo_rules:
-            return self.subtotal()
+            return round(self.subtotal(), 2)
 
         promo_rules_for_item = list(filter(lambda rule: rule.promotion_type == 'on_item_price', self.promo_rules))
         promo_rule_for_total = next(rule for rule in self.promo_rules if rule.promotion_type == 'on_total_price')
