@@ -1,9 +1,6 @@
 Feature: CheckoutSystem
+  Scenario: spending over £60 and buy 2 or more Curry
+    Given payment by default promotion rules
+    When spending over £60 and buy 2 or more Curry
+    Then return total price should equal to "66.78"
 
-  Scenario: Run a simple test
-    Given mass assignment
-     | Product code | Name          | Price |
-     | 001          | Curry Sauce   | 1.95  |
-     | 002          | Pizza         | 5.99  |
-     | 003          | Men's T-Shirt | 25.00 |
-    When something happen
