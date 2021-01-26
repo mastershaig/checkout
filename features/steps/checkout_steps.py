@@ -17,6 +17,7 @@ def step_impl(context):
 def step_impl(context, price):
     co = Checkout(context.promotion_rules)
     for val in context.basket:
+        # scan on each product
         co.scan(val)
     assert co.total() == float(price)
 
@@ -48,6 +49,7 @@ def step_impl(context):
 
 @when('spending over £30 and buy 3 or more T-Shirt')
 def step_impl(context):
+    # if you buy 3 or more than, the price will be decreased to 15.0 for each
     promotion_rule = PromotionRule(promotion_name="promotion T-Shirt x3", promotion_type="on_item_price",
                                    promotion_price=15, min_quantity=3)
     promotion_rule.add_product(context.product_3)

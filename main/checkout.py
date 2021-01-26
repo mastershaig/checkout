@@ -30,14 +30,14 @@ class Checkout(object):
         """
             Subtotal price without
             applying promotion code
-            :return: int
+            :return: float
         """
         return functools.reduce(lambda sum, cal: sum + float(cal.price), self.co_products, 0)
 
     def total(self):
         """
             Total price after promotion rule
-            :return: int
+            :return: float
         """
         if not self.promo_rules:
             return round(self.subtotal(), 2)
