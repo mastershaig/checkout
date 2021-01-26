@@ -32,3 +32,7 @@ def step_impl(context, price):
         co.scan(val)
     assert co.total() == float(price)
 
+
+@when('no apply any promotions')
+def step_impl(context):
+    context.promotion_rules = []
